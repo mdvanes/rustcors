@@ -14,7 +14,7 @@ PORT=5001 cargo run
 
 The server will start on http://0.0.0.0:5001/
 
-- GET http://0.0.0.0:5001/https://mdworld.nl → returns the content of https://mdworld.nl. If this is HTML, it will render the HTML but will not resolve resources like JS, CSS, or images that are imported with a relative path.
+- GET http://0.0.0.0:5001/https://mdworld.nl → returns the content of https://mdworld.nl. This works fine for JSON content. If the content is HTML, it will render the HTML but will not resolve resources like JS, CSS, or images that are imported with a relative path.
 - When the `PORT` envar is left out, the default port is 5080
 
 ## Dependencies
@@ -23,6 +23,7 @@ The server will start on http://0.0.0.0:5001/
 
 # Build
 
+cargo test
 cargo build --release
 PORT=5000 ./target/release/rustcors
 

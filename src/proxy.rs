@@ -1,3 +1,4 @@
+use super::add_cors_headers::add_cors_headers;
 use super::clone_response::clone_response;
 use tiny_http::{Request, Response};
 
@@ -9,18 +10,6 @@ fn build_target_url(url: &str) -> String {
     } else {
         format!("http://{}", url)
     }
-}
-
-fn add_cors_headers<R: std::io::Read>(response: &mut tiny_http::Response<R>) {
-    response
-        .add_header(tiny_http::Header::from_bytes(b"Access-Control-Allow-Origin", b"*").unwrap());
-    response.add_header(
-        tiny_http::Header::from_bytes(
-            b"Access-Control-Allow-Headers",
-            b"Origin, X-Requested-With, Content-Type, Accept",
-        )
-        .unwrap(),
-    );
 }
 
 pub fn proxy_url(request: Request, url: &str) {

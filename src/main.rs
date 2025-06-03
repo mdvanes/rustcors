@@ -1,3 +1,4 @@
+mod add_cors_headers;
 mod clone_response;
 mod handler;
 mod not_found;

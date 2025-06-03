@@ -1,6 +1,6 @@
 # RustCORS
 
-A tiny CORS Anywhere proxy made with Rust.
+A tiny CORS Anywhere proxy made with [Rust](https://www.rust-lang.org/).
 
 Adds CORS headers to each request to be able to call APIs that require CORS, without setting up your own server. Just start up this Docker container and start sending requests.
 

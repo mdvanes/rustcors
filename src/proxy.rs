@@ -34,3 +34,31 @@ pub fn proxy_url(request: Request, url: &str) {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_build_target_url_http() {
+        assert_eq!(build_target_url("http://example.com"), "http://example.com");
+    }
+
+    #[test]
+    fn test_build_target_url_https() {
+        assert_eq!(
+            build_target_url("https://example.com"),
+            "https://example.com"
+        );
+    }
+
+    #[test]
+    fn test_build_target_url_443() {
+        assert_eq!(build_target_url("example.com:443"), "https://example.com");
+    }
+
+    #[test]
+    fn test_build_target_url_plain() {
+        assert_eq!(build_target_url("example.com"), "http://example.com");
+    }
+}

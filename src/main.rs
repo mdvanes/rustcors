@@ -1,3 +1,4 @@
+mod clone_response;
 mod handler;
 mod not_found;
 mod proxy;
@@ -28,12 +29,6 @@ fn main() {
     };
 
     log!("Allowed origins: {:?}", origins);
-
-    // TODO implement CORS handling
-    //     func enableCors(w *http.ResponseWriter) {
-    // 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-    // 	(*w).Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-    // }
 
     // TODO check origin list
     // // If supplied originIncludeList is set use that, otherwise allow everything

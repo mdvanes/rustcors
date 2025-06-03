@@ -41,9 +41,9 @@ pub fn proxy_url(request: Request, url: &str) {
             }
             let _ = request.respond(response_with_body);
         }
-        Err(_) => {
-            let response =
-                Response::from_string("Failed to fetch target URL").with_status_code(502);
+        Err(e) => {
+            println!("[proxy_url] Failed to fetch target URL '{}': {}", target_url, e);
+            let response = Response::from_string("Failed to fetch target URL").with_status_code(502);
             let _ = request.respond(response);
         }
     }

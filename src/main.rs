@@ -2,6 +2,7 @@
 mod logger;
 
 mod add_cors_headers;
+mod check_origin_header;
 mod clone_response;
 mod handler;
 mod proxy;

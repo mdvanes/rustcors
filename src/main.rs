@@ -1,17 +1,27 @@
 mod handler;
+mod not_found;
 mod proxy;
 mod usage;
-mod not_found;
 
 use std::env;
-use tiny_http::{Server};
+use tiny_http::Server;
+
+macro_rules! log {
+    ($($arg:tt)*) => {{
+        let now = chrono::Local::now().format("%Y/%m/%d %H:%M:%S");
+        println!("{} {}", now, format!($($arg)*));
+    }};
+}
 
 fn main() {
-    let port = env::var("PORT").unwrap_or_else(|_| "8080".to_string());
+    let port = env::var("PORT").unwrap_or_else(|_| "5080".to_string());
     let addr = format!("0.0.0.0:{}", port);
     let server = Server::http(&addr).unwrap();
-    println!("Server running on http://{}/", addr);
-    
+
+    // TODO // 2025/06/03 09:30:03 Allowed origins: []
+
+    log!("Starting RustCORS 🦀 server on http://{}/", addr);
+
     for request in server.incoming_requests() {
         handler::handle_request(request);
     }

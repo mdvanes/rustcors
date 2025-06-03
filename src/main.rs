@@ -9,16 +9,19 @@ fn main() {
     for request in server.incoming_requests() {
         if request.method() == &tiny_http::Method::Get {
             let url = request.url();
-            if url == "/" {
-                let response = Response::from_string("Hello, World!");
-                let _ = request.respond(response);
-            } else if url.starts_with("/") && url.len() > 1 {
+            if url.starts_with("/") && url.len() > 1 {
                 // Remove the leading '/'
                 let param = &url[1..];
                 let response = Response::from_string(param);
                 let _ = request.respond(response);
             } else {
-                let response = Response::from_string("Not Found").with_status_code(404);
+                let usage = "Usage:\n\
+GET /<url> - Proxies the supplied URL and adds CORS headers.\n\
+Examples:\n\
+  /http://mdworld.nl/   → proxies http://mdworld.nl/\n\
+  /mdworld.nl:443       → proxies https://mdworld.nl/\n\
+  /                     → shows this help message\n";
+                let response = Response::from_string(usage);
                 let _ = request.respond(response);
             }
         } else {

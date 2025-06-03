@@ -1,4 +1,4 @@
-# RustCORS
+# RustCORS 🦀
 
 A tiny CORS Anywhere proxy made with [Rust](https://www.rust-lang.org/).
 

@@ -7,9 +7,20 @@ fn main() {
     let server = Server::http(&addr).unwrap();
     println!("Server running on http://{}/", addr);
     for request in server.incoming_requests() {
-        if request.method() == &tiny_http::Method::Get && request.url() == "/" {
-            let response = Response::from_string("Hello, World!");
-            let _ = request.respond(response);
+        if request.method() == &tiny_http::Method::Get {
+            let url = request.url();
+            if url == "/" {
+                let response = Response::from_string("Hello, World!");
+                let _ = request.respond(response);
+            } else if url.starts_with("/") && url.len() > 1 {
+                // Remove the leading '/'
+                let param = &url[1..];
+                let response = Response::from_string(param);
+                let _ = request.respond(response);
+            } else {
+                let response = Response::from_string("Not Found").with_status_code(404);
+                let _ = request.respond(response);
+            }
         } else {
             let response = Response::from_string("Not Found").with_status_code(404);
             let _ = request.respond(response);

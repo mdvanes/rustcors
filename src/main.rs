@@ -18,7 +18,12 @@ fn main() {
     let addr = format!("0.0.0.0:{}", port);
     let server = Server::http(&addr).unwrap();
 
-    // TODO // 2025/06/03 09:30:03 Allowed origins: []
+    let origins: Vec<String> = match env::var("ORIGINS") {
+        Ok(val) => val.split(',').filter(|s| !s.trim().is_empty()).map(|s| s.trim().to_string()).collect(),
+        Err(_) => Vec::new(),
+    };
+
+    log!("Allowed origins: {:?}", origins);
 
     log!("Starting RustCORS 🦀 server on http://{}/", addr);
 

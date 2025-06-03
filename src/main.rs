@@ -4,6 +4,7 @@ mod handler;
 mod not_found;
 mod proxy;
 mod usage;
+mod logger;
 
 use std::env;
 use tiny_http::Server;
@@ -45,6 +46,6 @@ fn main() {
     log!("Starting RustCORS 🦀 server on http://{}/", addr);
 
     for request in server.incoming_requests() {
-        handler::handle_request(request);
+        handler::handle_request(request, &origins);
     }
 }

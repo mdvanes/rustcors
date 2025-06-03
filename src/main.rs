@@ -1,20 +1,14 @@
+#[macro_use]
+mod logger;
+
 mod add_cors_headers;
 mod clone_response;
 mod handler;
-mod not_found;
 mod proxy;
-mod usage;
-mod logger;
+mod static_responses;
 
 use std::env;
 use tiny_http::Server;
-
-macro_rules! log {
-    ($($arg:tt)*) => {{
-        let now = chrono::Local::now().format("%Y/%m/%d %H:%M:%S");
-        println!("{} {}", now, format!($($arg)*));
-    }};
-}
 
 fn main() {
     let port = env::var("PORT").unwrap_or_else(|_| "5080".to_string());

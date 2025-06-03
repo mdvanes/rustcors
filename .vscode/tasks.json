@@ -1,0 +1,12 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Rust Web Server",
+            "type": "shell",
+            "command": "cargo run",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}
